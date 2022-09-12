@@ -42,6 +42,8 @@ function Transactions() {
       { id: 4, value: 'error', title: 'error', isActive: false },
    ]
    const crwallet = {
+      _id: '63177deb44e0671de092384f',
+      date: 1662483948,
       amount: 228.1337,
       coin: { symbol: "BTC", coinId: 'bitcoin', label: 'Bitcoin', img: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" },
       userId: '6307231b7633132f088a24b5',
@@ -51,7 +53,7 @@ function Transactions() {
          <main className={styles.main}>
             <div className={styles.header}>
                <div className={styles.header__head}>
-                  <article onClick={async () => { const resp = await FetchWallet.createWallet(crwallet); console.log(resp); }} className={styles.header__article}>Transaction History</article>
+                  <article onClick={async () => { const resp = await FetchWallet.removeWallet(crwallet); console.log(resp); }} className={styles.header__article}>Transaction History</article>
                </div>
                <div className={styles.header__sort}>
                   <div className={styles.sort__item}>

@@ -6,14 +6,11 @@ import styles from './index.module.scss'
 import { observer } from 'mobx-react-lite'
 import { SocketContext, StoreContext } from '../_app'
 import List from './list'
-import $api, { API_URL } from '../../http'
-import io from 'socket.io-client'
-import { useRouter } from 'next/router'
 import { debounce } from 'lodash'
 
 function MarketPage() {
 
-  const { market } = useContext(StoreContext)
+  const { market, user } = useContext(StoreContext)
   const { socket, socketConnected } = useContext(SocketContext)
   useEffect(() => {
     market.setIsFetch(true)
@@ -25,11 +22,11 @@ function MarketPage() {
     if (!socket || !socketConnected) return;
 
     console.log(socketConnected);
-    socket.emit('market', { page: market.page, limit: market.limit, currency: 'usd' })
+    socket.emit('market', { page: market.page, limit: market.limit, currency: user.currency.value })
     console.log('start fetch');
     socket.on('check_market', () => {
       if (market.isfetched) {
-        socket.emit('check_market', { page: market.page, limit: market.limit, currency: 'usd' })
+        socket.emit('check_market', { page: market.page, limit: market.limit, currency: user.currency.value })
       }
     })
     socket.on('market', (data) => {
@@ -41,7 +38,7 @@ function MarketPage() {
 
   useEffect(() => {
     if (market.list.length) {
-      socket.emit('market', { page: market.page, limit: market.limit, currency: 'usd' })
+      socket.emit('market', { page: market.page, limit: market.limit, currency: user.currency.value })
     }
   }, [market.page, market.limit])
 
@@ -114,7 +111,7 @@ function MarketPage() {
         <div className={styles.block}>
           {
             market.list.length ?
-              <List market={market} />
+              <List market={market} currency={user.currency.label} />
               : <div>Загрузка...</div>
           }
         </div>

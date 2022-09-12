@@ -34,15 +34,15 @@ function MainLayout({ children }) {
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
             <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
          </Head>
-         <body id='body'>
-            <main className='box_main '>
-               <Header />
-               <SideBar />
-               {children}
-            </main>
-            <ErrorAlert />
-            <MessageAlert />
-         </body>
+
+         <main className='box_main '>
+            <Header />
+            <SideBar />
+            {children}
+         </main>
+         <ErrorAlert />
+         <MessageAlert />
+
       </>
    )
 }

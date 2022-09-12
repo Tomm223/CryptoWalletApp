@@ -2,6 +2,9 @@ import styles from './index.module.scss'
 import { Button_Blue, Button_Green } from '../../../components/UI/Forms/buttons'
 import { Percent, Profit } from '../../../components/UI/BlockList/UI'
 import { FetchWallet } from '../../../http/fetch'
+import { useContext } from 'react'
+import { StoreContext } from '../../_app'
+import { observer } from 'mobx-react-lite'
 const wallets = [
    { coin: { id: 'bitcoin', name: "Bitcoin", symbol: 'BTC' }, amount: 14.0456, userId: 'sgrb', dateStart: 'UNIX ФОРМАТ' }
 ]
@@ -21,7 +24,8 @@ const user = {
 
    }
 }
-export default function CurrentWallet() {
+function CurrentWallet() {
+   const { user } = useContext(StoreContext)
 
    const getI = async () => {
       const resp = await FetchWallet.getChartWallet('63149d4cb6342d2b70ef4eab')
@@ -54,9 +58,11 @@ export default function CurrentWallet() {
          <img className={styles.block__chart} src="https://www.coingecko.com/coins/1/sparkline" alt="" />
 
          <div className={styles.block__footer}>
-            <Profit cout={182.98} currancy={'USD'} />
+            <Profit cout={182.98} currancy={user.currency.label} />
             <Percent>24.69</Percent>
          </div>
       </div>
    )
 }
+
+export default observer(CurrentWallet)

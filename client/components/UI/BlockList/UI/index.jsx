@@ -62,6 +62,15 @@ export function Profit({ count, currancy }) {
    )
 }
 
+export function Total({ amount, currancy }) {
+   return (
+      <div className={styles.total}>
+         <p className={styles.total__item}>{amount}</p>
+         <p className={styles.total__item}>{currancy}</p>
+      </div>
+   )
+}
+
 /**return (
          <p className={styles.red}>{count} {currancy}</p>
       ) */

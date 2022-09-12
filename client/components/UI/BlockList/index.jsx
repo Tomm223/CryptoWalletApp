@@ -1,13 +1,18 @@
+import { useRouter } from 'next/router'
 import styles from './index.module.scss'
 
 export default function BlockList({ label, link, children }) {
-
+   const router = useRouter()
+   const toPage = (e) => {
+      e.preventDefault()
+      router.push(link)
+   }
 
    return (
       <div className={`${styles.block}  box m `}>
          <div className={styles.head}>
             <h1 className={styles.head__label}>{label}</h1>
-            <a className={styles.head__link} href='#'>View All</a>
+            <a onClick={toPage} className={styles.head__link} href='#'>View All</a>
          </div>
          <div className={styles.main}>
             <ul className={styles.list}>

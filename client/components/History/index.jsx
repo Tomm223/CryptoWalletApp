@@ -7,7 +7,7 @@ export default function History({ history }) {
 
    return (
       <div className={styles.container}>
-         <BlockList label={'History'} link={'#'}>
+         <BlockList label={'History'} link={'/transactions'}>
             {!history ? <div>Вы не зарегестрированы</div> :
                history.length === 0 ? <div>У вас пока нет истории операций</div> :
                   history.length ? history.map(item => {

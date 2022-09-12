@@ -6,7 +6,7 @@ import { fixedNum } from '../../utils.js/num'
 
 
 
-const List = ({ market }) => {
+const List = ({ market, currency }) => {
 
    return (
       <ul className={styles.list}>
@@ -28,7 +28,7 @@ const List = ({ market }) => {
                   <div className={styles.btn}>
                      <Button_Green>Buy</Button_Green>
                   </div>
-                  <p className={styles.price}>{item.current_price} {`user.currecy`}</p>
+                  <p className={styles.price}>{item.current_price} {currency}</p>
                   <div className={styles.percent}>
                      <Percent children={perc1h} ></Percent>
                   </div>

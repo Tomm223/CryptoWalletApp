@@ -51,19 +51,17 @@ class WalletService {
    async walletAnalytics(wallet, currency) {
       const rand = Math.floor(Math.random() * 1000)
       const newDate = wallet.date + rand
-      console.log('newdate', newDate);
       const resp = await gotingServer.getChartPriceWallet(wallet.coin.coinId, currency, newDate, getUnix())//FetchWallet.getChartWallet(wallet._id)
-      console.log('между');
-      //const { target } = await gotingServer.convert(wallet.coin.coinId, currency)//FetchWallet.convertCrypto(wallet.coin.coinId, 'usd')   
-      console.log('после');
-      const target = 21000
-
+      const { target } = await gotingServer.convert(wallet.coin.coinId, currency)//FetchWallet.convertCrypto(wallet.coin.coinId, 'usd')   
       //
       wallet.analytics.profit = resp[resp.length - 1][1] - resp[0][1]
       wallet.analytics.percentage = resp[resp.length - 1][1] / resp[0][1] * 100 - 100
       return {
          wallet,
-         amountCurrency: resp[resp.length - 1][1] * target
+         amountCurrency: {
+            start: resp[0][1] * wallet.amount,
+            end: resp[resp.length - 1][1] * wallet.amount
+         }
       }
    };
 

@@ -1,4 +1,6 @@
 import { makeAutoObservable } from 'mobx'
+import cookie from 'js-cookie'
+
 class DashboardStore {
    market = {
       list: [],
@@ -14,6 +16,8 @@ class DashboardStore {
 
    setMarket(list) {
       this.market.list = list
+      cookie.set('dashboard_market', JSON.stringify(list), { expires: 1 / 24 / 4 })
+
    }
 
 

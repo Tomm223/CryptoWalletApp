@@ -10,36 +10,48 @@ import { observer } from 'mobx-react-lite'
 import { useContext, useEffect } from 'react';
 import { SocketContext, StoreContext } from '../_app';
 import cookie from 'js-cookie'
+
 function dashboard() {
-   const { history, market } = useContext(StoreContext)
+   const { history, user, dashboard } = useContext(StoreContext)
+   const { socket, socketConnected } = useContext(SocketContext)
+
    useEffect(function () {
       if (history.list.length) return
       history.fetch()
-   }, [history.list])
-
-   const { socket, socketConnected } = useContext(SocketContext)
-   const { dashboard, wallet } = useContext(StoreContext)
+   }, [history.list]);
 
    useEffect(() => {
-      if (!socket || !socketConnected) return;
-      socket.emit('market', {
-         page: dashboard.market._page,
-         limit: dashboard.market._limit,
-         currency: 'usd'
-      })
-   }, [socketConnected])
-   /*useEffect(() => {
-      const resp = async () => { await wallet.fetchWallets(); console.log(wallet.list); }
-      resp()
-   }, [])*/
-   /*useEffect(() => {
-      if (!wallet.list && wallet.totalWallet.total === 0) return
-      if (walletCookie) return
-      const walletCookie = cookie.get('wallet')
+      if (socket || socketConnected) {
+         socket.on('check_market', () => {
+            socket.emit('check_market', {
+               page: dashboard.market._page,
+               limit: dashboard.market._limit,
+               currency: user.currency.value
+            })
+         })
+         socket.on('market', (list) => {
+            dashboard.setMarket(list)
+            console.log('pj');
+            //  cookie.set('dashboard_market', JSON.stringify(list), { expires: 1 / 24 / 4 })
+         })
+      }
+      if (dashboard.market.list.length) return
+      const market_cookie = cookie.get('dashboard_market')
+      if (market_cookie) {
+         dashboard.setMarket(JSON.parse(market_cookie))
+         return
+      }
+      if (socket || socketConnected) {
+         socket.emit('market', {
+            page: dashboard.market._page,
+            limit: dashboard.market._limit,
+            currency: user.currency.value
+         })
+      }
+   }, [socketConnected]);
 
-      const resp = async () => await wallet.totalWalletCorrecting()
-      resp()
-   }, [wallet.list])*/
+
+
    return (
       <MainLayout>
          <main className={`${styles.main} main`}>
@@ -51,7 +63,11 @@ function dashboard() {
             </div>
             <div className={styles.markets}>
                {dashboard.market.list ?
-                  <Markets list={dashboard.market.list} /> : <>LOADING...</>
+                  <Markets
+                     list={dashboard.market.list}
+                     currency={user.currency.label}
+                  /> :
+                  <>LOADING...</>
                }
             </div>
             <div className={styles.chart_cyrcle}>

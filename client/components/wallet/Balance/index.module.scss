@@ -19,7 +19,7 @@
 
    &__name {
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 500;
    }
 
    &__img {
@@ -33,19 +33,17 @@
       align-items: center;
 
       img {
-         width: 25px;
-         height: 25px;
+         width: 30px;
+         height: 30px;
       }
    }
 }
 
 .main {
    margin-bottom: 15px;
-
-   &__count {
-      font-size: 30px;
-      font-weight: 600;
-   }
+   padding: 0;
+   font-size: 25px;
+   font-weight: 500;
 }
 
 .footer {

@@ -73,20 +73,7 @@ class walletController {
          res.status(400).json({ message: 'что-то пошло не так' })
       }
    }
-   async walletAnalytics(req, res) {
-      try {
-         const wallet = req.body
-         const userData = req.user
-         console.log('перед');
-         const { wallet: newWallet } = await WalletService.walletAnalytics(wallet, userData.currency.value)
-         console.log('после2');
-         res.json(newWallet)
-      }
-      catch (e) {
-         console.log(e);
-         res.status(400).json({ message: 'данные отсутвуют' })
-      }
-   }
+
    async walletListAnalytics(req, res) {
       try {
          const list = req.body
@@ -97,28 +84,27 @@ class walletController {
             percentage: 0,
             profit: 0
          }
+         let startMoney = 0
          let newList = []
          const go = (i = 0) => {
             if (i < list.length) {
                WalletService.walletAnalytics(list[i], userData.currency.value).then(({ wallet, amountCurrency }) => {
-                  console.log('gooo');
                   newList.push(wallet)
-                  total_wallet.total += amountCurrency
-                  total_wallet.percentage += wallet.analytics.percentage / list.length
-                  total_wallet.profit += wallet.analytics.profit / list.length
-                  go(i + 1)
+                  total_wallet.total += amountCurrency.end
+                  startMoney += amountCurrency.start
+                  console.log(i);
+                  setTimeout(() => go(i + 1), 2000)
                })
             }
             else {
+               total_wallet.profit = total_wallet.total - startMoney
+               total_wallet.percentage = total_wallet.total / startMoney * 100 - 100
                console.log('blia');
                res.json({ list: newList, totalWallet: total_wallet })
             }
          }
          go()
-         //const total_wallet = {}
-         //total_wallet.profit = profit / this.list.length
-         //total_wallet.percentage = percentage / this.list.length
-         //total_wallet.total = Math.floor(total)
+
 
       }
       catch (e) {
@@ -131,44 +117,3 @@ class walletController {
 module.exports = new walletController()
 
 
-
-
-/*
-await Promise.all(list.map(async (wallet) => {
-            const resp = await gotingServer.getChartPriceWallet(wallet.coin.coinId, userData.currency.value, wallet.date, getUnix())//FetchWallet.getChartWallet(wallet._id)
-            const { target, crypto, currency } = await gotingServer.convert(wallet.coin.coinId, userData.currency.value)//FetchWallet.convertCrypto(wallet.coin.coinId, 'usd')   
-            //
-            coun++
-            console.log(coun);
-
-            profit += resp[resp.length - 1][1] - resp[0][1]
-            percentage += resp[resp.length - 1][1] / resp[0][1] * 100 - 100
-            total += resp[resp.length - 1][1] * target
-            //
-            wallet.analytics.profit = resp[resp.length - 1][1] - resp[0][1]
-            wallet.analytics.percentage = resp[resp.length - 1][1] / resp[0][1] * 100 - 100
-            return wallet
-         }));
-
-
-
-
-
-
-           const newWallet = async (wallet) => {
-            const resp = await gotingServer.getChartPriceWallet(wallet.coin.coinId, userData.currency.value, wallet.date, getUnix())//FetchWallet.getChartWallet(wallet._id)
-            const { target, crypto, currency } = await gotingServer.convert(wallet.coin.coinId, userData.currency.value)//FetchWallet.convertCrypto(wallet.coin.coinId, 'usd')   
-            //
-            coun++
-            console.log(coun);
-
-            profit += resp[resp.length - 1][1] - resp[0][1]
-            percentage += resp[resp.length - 1][1] / resp[0][1] * 100 - 100
-            total += resp[resp.length - 1][1] * target
-            //
-            wallet.analytics.profit = resp[resp.length - 1][1] - resp[0][1]
-            wallet.analytics.percentage = resp[resp.length - 1][1] / resp[0][1] * 100 - 100
-            return wallet
-         };
-
-*/

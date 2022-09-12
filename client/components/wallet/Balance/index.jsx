@@ -1,9 +1,14 @@
-import { userInfo } from 'os'
-import { Percent, Profit, CountCoin } from '../../UI/BlockList/UI'
+
+import { fixedNum, floor } from '../../../utils.js/num'
+import { Percent, Profit, Total } from '../../UI/BlockList/UI'
 import styles from './index.module.scss'
 
-export default function Balance({ walletTotal }) {
+export default function Balance({ walletTotal, isloading, currancy }) {
+
    const { total, percentage, profit } = walletTotal
+   const $total = floor(total)
+   const $percentagenum = fixedNum(percentage)
+   const $profitnum = floor(profit)
    return (
       <div className={`${styles.block} box s`}>
          <div className={styles.head}>
@@ -16,14 +21,23 @@ export default function Balance({ walletTotal }) {
             </div>
          </div>
          <div className={styles.main}>
-            <p className={styles.main__count}>{total}user.curr</p>
+            {
+               isloading ? <div>Loading...</div> :
+                  <Total amount={$total} currancy={currancy} />
+            }
          </div>
          <div className={styles.footer}>
             <p className={styles.footer__label}>Monthly Profit</p>
             <div className={styles.footer__profit}>
-               <Profit currancy={'user.currency'} count={profit} />
+               {
+                  isloading ? <div>Loading...</div> :
+                     <Profit currancy={currancy} count={$profitnum} />
+               }
             </div>
-            <Percent>{percentage}</Percent>
+            {
+               isloading ? <div>Loading...</div> :
+                  <Percent>{$percentagenum}</Percent>
+            }
          </div>
       </div>
 
