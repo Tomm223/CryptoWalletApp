@@ -1,0 +1,17 @@
+.more {
+   cursor: pointer;
+   width: 35px;
+   height: 25px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: inherit;
+   border: 1px solid rgba($color: #7F8A9B, $alpha: .4);
+   border-radius: 7px;
+}
+
+.img {
+   width: auto;
+   height: 15px;
+   transform: rotate(90deg);
+}

@@ -1,0 +1,68 @@
+@import '../../../styles/globals.scss';
+
+.input {
+   width: 100%;
+   position: relative;
+
+   &__item {
+      width: 100%;
+      border-radius: .4em;
+      padding: .7em .7em;
+      padding-right: 80px;
+      background-color: $black;
+      color: $supText;
+      font-weight: 500;
+      font-size: 18px;
+      border: none;
+
+      &::placeholder {
+         color: $btn_gray;
+      }
+
+      &:focus {
+         outline: none;
+      }
+   }
+
+
+   &__select {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translate(-10%, -50%);
+      font-size: 12px;
+   }
+
+
+}
+
+.btn {
+   cursor: pointer;
+   padding: 13px 17px;
+   border-radius: 7px;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: $btnBlue;
+   color: $dark;
+   font-weight: 700;
+   border: 0;
+}
+
+.btn_green {
+   cursor: pointer;
+   padding: 5px 10px;
+   background-color: $green;
+   color: $dark;
+   font-weight: 700;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border: 0;
+   border-radius: 7px;
+
+   &:hover {
+      background-color: $green_dark;
+   }
+}

@@ -1,0 +1,56 @@
+@import '../../styles/globals.scss';
+
+.block {
+   padding: 20px 30px;
+   width: 100%;
+   height: 100%;
+   max-height: 300px;
+   max-width: 410px;
+}
+
+.head {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 15px;
+
+
+   h3 {
+      font-size: 20px;
+      font-weight: 600;
+   }
+}
+
+.more {
+   cursor: pointer;
+   width: 35px;
+   height: 25px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: inherit;
+   border: 1px solid rgba($color: #7F8A9B, $alpha: .4);
+   border-radius: 7px;
+}
+
+.img {
+   width: auto;
+   height: 15px;
+   transform: rotate(90deg);
+}
+
+.form {
+   width: 100%;
+
+   &__mb {
+      margin-bottom: 15px;
+   }
+
+   &__support {
+      word-wrap: break-word;
+
+      p {
+         color: $supText;
+      }
+   }
+}
