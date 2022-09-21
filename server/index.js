@@ -11,9 +11,14 @@ const app = express()
 const http = require('http')
 const server = http.createServer(app)
 const _ = require('lodash')
-const getUnix = require('./utils.js')
-const fixedNum = require('./utils.js')
-
+const getUnix = require('./utils/index.js')
+const fixedNum = require('./utils/index.js')
+const tokenService = require('./service/tokenService.js')
+const WalletService = require('./service/WalletService.js')
+const toUnix = require('./utils/toUnix')
+const Floor = require('./utils/floor')
+const fixedToFiveEnd = require('./utils/fixedToFiveEnd.js')
+const buildChartData = require('./utils/buildChartData')
 // socket
 const io = require("socket.io")(server, {
     cors: {
@@ -44,62 +49,135 @@ const intervalGlobal = 30000;
 let cc = 0
 
 
-io.on('connection', (client) => {
-    let num = Math.floor(Math.random() * 10)
-    const intrvalMarket = setInterval(() => {
-        console.log('date', num)
-        io.emit('check_market')
-    }, 120000)
+io.use((socket, next) => {
+    const token = socket.handshake.auth.token;
+    const user = tokenService.validateAccessToken(token)
+    if (user) {
+        socket.userData = user
+    }
 
-    client.on('disconnect', () => {
-        console.log('end');
-        clearInterval(intrvalMarket)
-    })
-    client.on('check_market', async (bodyQuery) => {
+    next();
+});
+
+io.on('connection', (client) => {
+    const userData = client.userData
+    let num = Math.floor(Math.random() * 10)
+    const intervalMarket = setInterval(() => {
+        console.log('date', num)
+        client.emit('check_market')
+    }, 300000)
+    const intervalDashboardChart = setInterval(() => {
+        console.log('date', num)
+        client.emit('check_dashboard_chart')
+    }, 305000)
+    const intervalDashboardMarket = setInterval(async () => {
+        console.log('date', num)
+        client.emit('check_dashboard_market')
+    }, 360000)
+    const intervalWallet = setInterval(() => {
+        console.log('wallet_check')
+        if (userData) {
+            io.emit('check_wallet')
+        }
+    }, 480000 /*480000 */)
+
+    client.on('wallet', async (socket) => {
         try {
-            const resp = await gotingServer.getMarketCoins(bodyQuery)
-            console.log('before_resp');
-            io.emit('market', resp)
+            if (!userData) {
+                console.log('err');
+                throw ''
+            }
+            const wallet = await WalletService.getWallet(userData)
+            client.emit('wallet', wallet)
+            //analytics
+            if (wallet.list.length) {
+                const list = wallet.list
+                const total_wallet = {
+                    total: 0,
+                    percentage: 0,
+                    profit: 0
+                }
+                let startMoney = 0
+                let newList = []
+                const go = (i = 0) => {
+                    if (i < list.length) {
+                        WalletService.walletAnalytics(list[i], userData.currency.value).then(({ wallet, amountCurrency }) => {
+                            newList.push(wallet)
+                            total_wallet.total += amountCurrency.end
+                            startMoney += amountCurrency.start
+                            console.log(i);
+                            setTimeout(() => go(i + 1), 1000)
+                        })
+                    }
+                    else {
+                        total_wallet.profit = total_wallet.total - startMoney
+                        total_wallet.percentage = total_wallet.total / startMoney * 100 - 100
+                        client.emit('wallet_analytics', { list: newList, totalWallet: total_wallet })
+                    }
+                }
+                go()
+            }
+            else {
+                client.emit('wallet', { status: null })
+            }
         }
         catch (e) {
-            io.emit('error', e)
+            clearInterval(intervalWallet)
+            client.emit('auth', { status: 403 })
+        }
+    })
+
+    // markets 
+
+    client.on('dashboard_market', async (bodyQuery) => {
+        try {
+            const resp = await gotingServer.getMarketCoins(bodyQuery)
+            console.log('dashboard_before_resp');
+            client.emit('dashboard_market', resp)
+        }
+        catch (e) {
+            client.emit('error', e)
         }
 
     })
-
     client.on('market', async (client) => {
-        console.log('start_market', client.page);
+        console.log('start_market', client);
         const resp = await gotingServer.getMarketCoins(client)
         io.emit('market', resp)
     })
-
-
-    client.on('get', async (client) => {
-        const resp = await gotingServer.getCoinById(client.message)
-        io.emit('return', resp)
-    })
-
-    client.on('coin', (client) => {
-        //setInterval(() => {
-        const resp = async () => {
-            const resp = await gotingServer.getCoinById(client.id)
-            io.io.emit('coin', resp)
+    //chart
+    client.on('dashboard_chart', async (body) => {
+        try {
+            const { date, order, coinId, currency } = body
+            const { start, end } = date
+            const resp = await gotingServer.getChartPriceWallet(coinId, currency, start, end)
+            let needResp = resp.filter((elem, index) => index % order === 0 ? true : false)
+            needResp.push(resp[resp.length - 1])
+            needResp = needResp.map((elem) => {
+                const price = elem[1] > 1 ? Floor(elem[1]) : fixedToFiveEnd(elem[1])
+                return [toUnix(elem[0]), price]
+            })
+            needResp = buildChartData(needResp)
+            client.emit('dashboard_chart', needResp)
         }
-        resp()
-        // }, interval)
+        catch (e) {
+            console.log(e);
+            client.emit('error', { message: 'при получении графика произошла ошибка' })
+        }
+
     })
-    client.on('convert_list', (client) => {
-        //
+    //
+    client.on('disconnect', () => {
+        console.log('end');
+        clearInterval(intervalDashboardChart)
+        clearInterval(intervalMarket)
+        clearInterval(intervalDashboardMarket)
+        clearInterval(intervalWallet)
     })
+    //
     client.on('convert', async ({ crypto, currency }) => {
-        //setInterval(async () => {
         const { target } = await gotingServer.convert(crypto, currency)
         io.emit('convert', target)
-        // }, interval)
-    })
-
-    client.on('disconnection', () => {
-        clearInterval(intrvalMarket)
     })
 });
 
@@ -116,6 +194,7 @@ const start = async () => {
 }
 
 start()
+
 
 
 

@@ -39,6 +39,10 @@ class gotingServer {
       const resp = await got(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart/range?vs_currency=${targetCurr}&from=${dateStart}&to=${dateEnd}`).json()
       return resp.prices
    }
+   async getCoinsList() {
+      const resp = await got(`https://api.coingecko.com/api/v3/coins/list?include_platform=false`).json()
+      return resp
+   }
 
 }
 

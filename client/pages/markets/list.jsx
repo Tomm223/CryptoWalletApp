@@ -5,7 +5,6 @@ import { ItemMarketPage as Item } from '../../components/UI/BlockList/Items'
 import { fixedNum } from '../../utils.js/num'
 
 
-
 const List = ({ market, currency }) => {
 
    return (
@@ -38,7 +37,7 @@ const List = ({ market, currency }) => {
                   <div className={styles.percent}>
                      <Percent children={perc7d}></Percent>
                   </div>
-                  <p className={styles.price}>{item.market_cap}$</p>
+                  <p className={styles.price}>{item.market_cap} {currency}</p>
                   <div className={styles.percent}>
                      <Percent children={mkt24h} />
                   </div>

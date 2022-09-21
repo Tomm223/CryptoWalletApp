@@ -48,6 +48,10 @@
    color: $dark;
    font-weight: 700;
    border: 0;
+
+   &:disabled {
+      background-color: rgba($color: $btnBlue, $alpha: .5);
+   }
 }
 
 .btn_green {

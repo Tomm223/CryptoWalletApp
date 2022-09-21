@@ -1,10 +1,9 @@
 @import '../../../styles/globals.scss';
 
 .block {
-   width: 100%;
+   width: 313px;
    height: 100%;
    padding: 20px;
-   max-width: 360px;
 }
 
 .head {
@@ -40,10 +39,11 @@
 }
 
 .main {
-   margin-bottom: 15px;
+   margin-bottom: 20px;
    padding: 0;
    font-size: 25px;
    font-weight: 500;
+   width: 100%;
 }
 
 .footer {

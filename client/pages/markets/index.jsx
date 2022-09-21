@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite'
 import { SocketContext, StoreContext } from '../_app'
 import List from './list'
 import { debounce } from 'lodash'
+import Spinner from '../../components/UI/loaders/Spinner'
 
 function MarketPage() {
 
@@ -24,16 +25,14 @@ function MarketPage() {
     console.log(socketConnected);
     socket.emit('market', { page: market.page, limit: market.limit, currency: user.currency.value })
     console.log('start fetch');
-    socket.on('check_market', () => {
+    /*socket.on('check_market', () => {
       if (market.isfetched) {
-        socket.emit('check_market', { page: market.page, limit: market.limit, currency: user.currency.value })
+        socket.emit('market', { page: market.page, limit: market.limit, currency: user.currency.value })
       }
     })
     socket.on('market', (data) => {
       market.refresh(data)
-    })
-
-
+    })*/
   }, [socketConnected])
 
   useEffect(() => {
@@ -112,7 +111,9 @@ function MarketPage() {
           {
             market.list.length ?
               <List market={market} currency={user.currency.label} />
-              : <div>Загрузка...</div>
+              : <div className={'spinner_center'}>
+                <Spinner />
+              </div>
           }
         </div>
 

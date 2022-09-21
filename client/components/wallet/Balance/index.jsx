@@ -1,6 +1,7 @@
 
 import { fixedNum, floor } from '../../../utils.js/num'
 import { Percent, Profit, Total } from '../../UI/BlockList/UI'
+import { BorderNumberLoader, TextLoader } from '../../UI/loaders/text'
 import styles from './index.module.scss'
 
 export default function Balance({ walletTotal, isloading, currancy }) {
@@ -21,23 +22,14 @@ export default function Balance({ walletTotal, isloading, currancy }) {
             </div>
          </div>
          <div className={styles.main}>
-            {
-               isloading ? <div>Loading...</div> :
-                  <Total amount={$total} currancy={currancy} />
-            }
+            <Total isLoading={isloading} amount={$total} currancy={currancy} />
          </div>
          <div className={styles.footer}>
             <p className={styles.footer__label}>Monthly Profit</p>
             <div className={styles.footer__profit}>
-               {
-                  isloading ? <div>Loading...</div> :
-                     <Profit currancy={currancy} count={$profitnum} />
-               }
+               <Profit isLoading={isloading} currancy={currancy} count={$profitnum} />
             </div>
-            {
-               isloading ? <div>Loading...</div> :
-                  <Percent>{$percentagenum}</Percent>
-            }
+            <Percent isLoading={isloading}>{$percentagenum}</Percent>
          </div>
       </div>
 

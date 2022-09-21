@@ -33,6 +33,21 @@ $borderLight: #C4CACD;
   background-color: rgba($color: #fff, $alpha: .5);
 }
 
+.spinner_center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &__display {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 .box {
   font-size: 15px;
   border-radius: 1.2em;
@@ -181,7 +196,7 @@ $borderLight: #C4CACD;
 
 }
 
-@media screen and (max-width:1366px) {
+@media screen and (max-width:1200px) {
   .box_main {
     grid-template-rows: 70px 1fr;
   }
@@ -210,7 +225,7 @@ $borderLight: #C4CACD;
   }
 }
 
-@media screen and (max-width:1024px) {
+@media screen and (max-width:1048px) {
   .box_main {
     display: flex;
     flex-direction: column;

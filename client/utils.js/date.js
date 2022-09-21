@@ -12,6 +12,12 @@ export function unixToMyDateObj(unix) {
    }
 }
 
+export function getUnix() {
+   return Math.floor(
+      Date.now() / 1000
+   )
+}
+
 function unixToDate(unixTimestamp) {
    return new Date(
       unixTimestamp * 1000

@@ -5,8 +5,8 @@ class UserStore {
    email = ''
    avatar_link = ''
    currency = {
-      value: '',
-      label: ''
+      value: 'usd',
+      label: 'USD'
    }
    userAnonim = false
    constructor() {
@@ -29,8 +29,8 @@ class UserStore {
       this.lastname = ''
       this.email = ''
       this.avatar_link = ''
-      this.currency.value = ''
-      this.currency.label = ''
+      this.currency.value = 'usd'
+      this.currency.label = 'USD'
       //bool
       this.isAuth = false
    }

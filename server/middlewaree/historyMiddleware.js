@@ -1,6 +1,3 @@
-const e = require('express');
-const jwt = require('jsonwebtoken')
-const { secretAccess } = require('../config');
 const historyService = require('../service/historyService');
 const getUnix = require('../utils');
 

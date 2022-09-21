@@ -5,7 +5,7 @@ class MarketPageStore {
    search = ''
    list = []
    limit = 100
-   page = 3
+   page = 1
    isfetched = false
    constructor() {
       makeAutoObservable(this)

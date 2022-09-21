@@ -9,6 +9,23 @@ export function ItemHistory({ children }) {
    )
 }
 
+export function ItemProfile({ children }) {
+
+   return (
+      <li className={styles.itemAssetsProfile}>
+         {children}
+      </li>
+   )
+}
+export function ItemBalanceProfile({ children }) {
+
+   return (
+      <li className={styles.itemAssetsBalance}>
+         {children}
+      </li>
+   )
+}
+
 export function ItemMarkets({ children }) {
    return (
       <li className={styles.itemMarkets}>

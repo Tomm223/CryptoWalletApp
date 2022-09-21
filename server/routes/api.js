@@ -14,6 +14,7 @@ router.put('/wallet/:id/withdraw/:difference', historyMiddleware, walletControll
 router.post('/wallet/:id/delete', historyMiddleware, walletController.removeWallet)
 router.get('/history', apiController.getHistory)
 router.get('/convert/:crypto/:currency', apiController.ConvertCrypto)
+router.get('/coins/list', apiController.GetCoinList)
 
 module.exports = router
 

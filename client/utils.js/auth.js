@@ -8,7 +8,7 @@ export const singUp = async ({ email, password, username, lastname }) => {
       return resp.user
    }
    catch (e) {
-      console.log(e);
+      return e.response.data.message
    }
 }
 export const singIn = async ({ email, password }) => {
@@ -18,7 +18,7 @@ export const singIn = async ({ email, password }) => {
       return resp.user
    }
    catch (e) {
-      console.log(e);
+      return e.response.data.message
    }
 }
 export const singOut = async () => {
@@ -28,6 +28,6 @@ export const singOut = async () => {
       return resp.message
    }
    catch (e) {
-      console.log(e);
+      return e.response.data.message
    }
 }

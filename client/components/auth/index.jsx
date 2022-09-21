@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
 import { useRouter } from "next/router"
 import { useContext } from "react"
-import { StoreContext } from "../../pages/_app"
+import { SocketContext, StoreContext } from "../../pages/_app"
 import { singIn, singUp } from "../../utils.js/auth"
 import Login from "./Login"
 import Registration from "./Registration"
@@ -9,6 +9,7 @@ import Registration from "./Registration"
 function AuthWindowContainer({ children }) {
 
    const { user, main } = useContext(StoreContext)
+   const { socket, refetchSocket } = useContext(SocketContext)
    const router = useRouter()
    const toUnAuth = () => {
 
@@ -17,20 +18,43 @@ function AuthWindowContainer({ children }) {
       }
    }
    const login = async (formBody) => {
-      const userData = await singIn(formBody)
-      user.setUser(userData)
-      main.closeLogin()
-      if (router.pathname === '/') {
-         router.back()
+      try {
+         const userData = await singIn(formBody)
+         if (typeof userData === 'string') {
+            console.log(userData); // закинуть это в FORMIK_ERROR
+         }
+         else {
+            user.setUser(userData)
+            main.closeLogin()
+            if (router.pathname === '/') {
+               router.back()
+            }
+            refetchSocket()
+         }
+      }
+      catch (e) {
+         console.log('error', e);
       }
    }
    const registration = async (formBody) => {
-      const userData = await singUp(formBody)
-      user.setUser(userData)
-      main.closeRegistration()
-      if (router.pathname === '/') {
-         router.back()
+      try {
+         const userData = await singUp(formBody)
+         if (typeof userData === 'string') {
+            console.log(userData); // закинуть это в FORMIK_ERROR
+         }
+         else {
+            user.setUser(userData)
+            main.closeRegistration()
+            if (router.pathname === '/') {
+               router.back()
+            }
+            refetchSocket()
+         }
       }
+      catch (e) {
+         console.log(e);
+      }
+
    }
    return (
       <>

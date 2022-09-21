@@ -1,9 +1,12 @@
 import styles from './index.module.scss'
 import { CountCoin, Percent, Profit, Total } from '../../UI/BlockList/UI'
 import { fixedCoinNum, fixedNum, floor } from '../../../utils.js/num'
+import { SparkLine } from '../../charts'
+import ChartLoader from '../../UI/loaders/chart'
+import { TextLoader, BorderNumberLoader } from '../../UI/loaders/text'
 export default function CoinWallet({ isloading, analytics, currancy, amount, coin }) {
    const { label, symbol, img } = coin
-   const { profit, percentage } = analytics
+   const { profit, percentage, sparkline } = analytics
    const $amount = fixedCoinNum(amount)
    const $profit = floor(profit)
    const $percentage = fixedNum(percentage)
@@ -25,23 +28,21 @@ export default function CoinWallet({ isloading, analytics, currancy, amount, coi
                </div>
             </div>
             <div className={styles.block__chart}>
-               <img src="/icon/chart-wallet.png" alt="" />
+               {
+                  isloading ?
+                     <ChartLoader />
+                     :
+                     <SparkLine style={{ width: '100%', minWidth: '135px' }} data={sparkline} />
+               }
+
             </div>
          </div>
          <div className={styles.block__footer}>
             <p className={styles.footer__label}>PNL Daily</p>
-            {
-               !isloading ?
-                  <Profit count={$profit} currancy={currancy} />
-                  :
-                  <div>loading...</div>
-            }
-            {
-               !isloading ?
-                  <Percent>{$percentage}</Percent>
-                  :
-                  <div>Loading...</div>
-            }
+            <Profit isLoading={isloading} count={$profit} currancy={currancy} />
+
+            <Percent isLoading={isloading}>{$percentage}</Percent>
+
          </div>
       </div>
    )

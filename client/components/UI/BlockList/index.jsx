@@ -12,7 +12,12 @@ export default function BlockList({ label, link, children }) {
       <div className={`${styles.block}  box m `}>
          <div className={styles.head}>
             <h1 className={styles.head__label}>{label}</h1>
-            <a onClick={toPage} className={styles.head__link} href='#'>View All</a>
+            {
+               link ?
+                  <a onClick={toPage} className={styles.head__link} href='#'>View All</a>
+                  :
+                  <div></div>
+            }
          </div>
          <div className={styles.main}>
             <ul className={styles.list}>

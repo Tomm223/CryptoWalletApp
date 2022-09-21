@@ -5,7 +5,65 @@ const gotingServer = require("../got/index")
 
 
 class WalletService {
-
+   async getWallet(userData) {
+      try {
+         const wallet = await Wallet.findOne({ userId: userData.id })
+         const newList = wallet.list.map((item) => {
+            const newItem = {
+               coin: item.coin,
+               _id: item._id,
+               amount: item.amount,
+               userId: item.userId,
+               date: item.date,
+               analytics: {
+                  profit: 0,
+                  percentage: 0,
+                  sparkline: [],
+                  price: {
+                     currency_coin: 0,
+                     currency_amount: 0
+                  }
+               }
+            }
+            return newItem
+         })
+         return { ...wallet._doc, list: newList }
+      }
+      catch (e) {
+         return { message: 'что-то пошло не так' }
+      }
+   }
+   async walletListAnalytics(list, userData) {
+      try {
+         const total_wallet = {
+            total: 0,
+            percentage: 0,
+            profit: 0
+         }
+         let startMoney = 0
+         let newList = []
+         const go = (i = 0) => {
+            if (i < list.length) {
+               this.walletAnalytics(list[i], userData.currency.value).then(({ wallet, amountCurrency }) => {
+                  newList.push(wallet)
+                  total_wallet.total += amountCurrency.end
+                  startMoney += amountCurrency.start
+                  console.log(i);
+                  setTimeout(() => go(i + 1), 2000)
+               })
+            }
+            else {
+               total_wallet.profit = total_wallet.total - startMoney
+               total_wallet.percentage = total_wallet.total / startMoney * 100 - 100
+               return { list: newList, totalWallet: total_wallet }
+            }
+         }
+      }
+      catch (e) {
+         console.log(e);
+         return { message: 'при подсчета аналитики произошла ошибка' }
+      }
+   }
    depositWithDraw(isDeposit, wallet, diffNum, walletId) {
       wallet.list = wallet.list.map(item => {
          if (item.id === walletId) {
@@ -49,18 +107,22 @@ class WalletService {
    }
 
    async walletAnalytics(wallet, currency) {
-      const rand = Math.floor(Math.random() * 1000)
-      const newDate = wallet.date + rand
-      const resp = await gotingServer.getChartPriceWallet(wallet.coin.coinId, currency, newDate, getUnix())//FetchWallet.getChartWallet(wallet._id)
-      const { target } = await gotingServer.convert(wallet.coin.coinId, currency)//FetchWallet.convertCrypto(wallet.coin.coinId, 'usd')   
-      //
-      wallet.analytics.profit = resp[resp.length - 1][1] - resp[0][1]
-      wallet.analytics.percentage = resp[resp.length - 1][1] / resp[0][1] * 100 - 100
+      let resp = await gotingServer.getChartPriceWallet(wallet.coin.coinId, currency, wallet.date, getUnix())//FetchWallet.getChartWallet(wallet._id)
+      resp = resp.map(item => item[1])
+      const sparkline = resp.length > 25 ? resp.slice(-25) : resp
+      const startAmount = resp[0] * wallet.amount
+      const endAmount = resp[resp.length - 1] * wallet.amount
+
+      wallet.analytics.profit = endAmount - startAmount
+      wallet.analytics.percentage = endAmount / startAmount * 100 - 100
+      wallet.analytics.sparkline = sparkline
+      wallet.analytics.price.currency_coin = resp[resp.length - 1]
+      wallet.analytics.price.currency_amount = endAmount
       return {
          wallet,
          amountCurrency: {
-            start: resp[0][1] * wallet.amount,
-            end: resp[resp.length - 1][1] * wallet.amount
+            start: startAmount,
+            end: endAmount
          }
       }
    };

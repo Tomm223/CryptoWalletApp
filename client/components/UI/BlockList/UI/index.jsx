@@ -1,3 +1,4 @@
+import { BorderNumberLoader, TextLoader } from '../../loaders/text'
 import styles from './index.module.scss'
 
 export function DownUp({ status }) {
@@ -10,8 +11,14 @@ export function DownUp({ status }) {
    )
 }
 
-export function Percent({ children }) {
-   if (children < 0) {
+export function Percent({ children, isLoading }) {
+
+   if (isLoading) {
+      return <BorderNumberLoader />
+
+   }
+
+   else if (children < 0) {
       return (
          <div className={styles.percent_red}>
             <p className={styles.percent__item}>{children}%</p>
@@ -38,9 +45,14 @@ export function Status({ status }) {
    )
 }
 
-export function CountCoin({ children, currancy }) {
+export function CountCoin({ children, currancy, isLoading }) {
 
-   if (children < 0) {
+   if (isLoading) {
+      return <TextLoader>12434544534543</TextLoader>
+
+   }
+
+   else if (children < 0) {
       return (
          <p className={styles.red}>{children} <span>{currancy}</span></p>
       )
@@ -50,19 +62,34 @@ export function CountCoin({ children, currancy }) {
    )
 }
 
-export function Profit({ count, currancy }) {
+export function Profit({ count, currancy, isLoading }) {
 
-   if (count < 0) {
+   if (isLoading) {
+      return <TextLoader>12434544534543</TextLoader>
+
+   }
+
+   else if (count < 0) {
       return (
-         <p className={styles.red}>{count} <span>{currancy}</span></p>
+         <div className={styles.red}>
+            <p> {count}</p> <span>{currancy}</span>
+         </div>
       )
    }
    return (
-      <p className={styles.green}>+{count} <span>{currancy}</span></p>
+      <div className={styles.green}>
+         <p>+{count}</p> <span>{currancy}</span>
+      </div>
    )
 }
 
-export function Total({ amount, currancy }) {
+export function Total({ amount, currancy, isLoading }) {
+
+   if (isLoading) {
+      return <TextLoader>12434544534543</TextLoader>
+
+   }
+
    return (
       <div className={styles.total}>
          <p className={styles.total__item}>{amount}</p>

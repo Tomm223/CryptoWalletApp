@@ -69,9 +69,30 @@ class WalletFetch {
    }
    async convertCrypto(coinId, currency) {
       const resp = await $api.get(`http://localhost:5000/api/convert/${coinId}/${currency}`)
+      const { target, currency: curr, crypto } = resp.data
+      return { target, currency: curr, crypto }
+   }
+   async getCoinsList() {
+      const resp = await $api.get('http://localhost:5000/api/coins/list')
       return resp.data
+   }
+}
+
+class NextApiFetch {
+   async getCurrencyOptions() {
+      const resp = await fetch('api/currency/option')
+      return resp.json()
+   }
+   async getCoinsOptions() {
+      const resp = await fetch('api/coin/option')
+      return resp.json()
+   }
+   async getCurrencys() {
+      const resp = await fetch('api/currency')
+      return resp.json()
    }
 }
 export const FetchWallet = new WalletFetch()
 export const FetchAuth = new AuthFetch()
+export const NextApi = new NextApiFetch()
 

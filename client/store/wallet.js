@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import { FetchWallet } from '../http/fetch';
 import cookie from 'js-cookie'
+
 class WalletStore {
    list = []
    userId = null
@@ -14,57 +15,23 @@ class WalletStore {
    constructor() {
       makeAutoObservable(this);
    }
-   setWallet({ list, userId, _id, totalWallet }) {
+   setWallet({ list, userId, _id }) {
       this.list = list
+      this.userId = userId
+      this._id = _id
+      //
+      this.isloading = true
+   }
+
+   setWalletAnalytics({ totalWallet, list }) {
       this.totalWallet = totalWallet
-      if (userId) this.userId = userId
-      if (_id) this._id = _id
+      this.list = list
+      // add data for user
+      this.isloading = false
    }
 
-   async fetchWallets() {
-      try {
-         this.isloading = true
-         const resp = await FetchWallet.getWallet()
-         this.list = resp.list.map(wallet => {
-            wallet.analytics = {
-               profit: null,
-               percentage: null
-            }
-            return wallet
-         })
-         this.userId = resp.userId
-         this._id = resp._id
-         // подсчёт
-         if (this.list.length) {
-            this.getWalletAnalytics()
-         }
-      }
-      catch (e) {
-         console.log('ERRORS', e);
-      }
-   }
-   async getWalletAnalytics() {
-      try {
-         const { list, totalWallet } = await FetchWallet.getWalletAnalytics(this.list)
-         console.log('пришло');
-         this.list = list
-         this.totalWallet = totalWallet
-         this.isloading = false
-         //save
-         this.saveWalletCookie()
-
-      }
-      catch (e) {
-
-      }
-   }
-   saveWalletCookie() {
-      cookie.set('wallet_store', JSON.stringify({
-         list: this.list,
-         userId: this.userId,
-         _id: this._id,
-         totalWallet: this.totalWallet
-      }), { expires: 1 / 24 / 6 })
+   WalletsZero() {
+      this.isloading = false
    }
 
 }

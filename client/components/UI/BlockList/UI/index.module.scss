@@ -51,25 +51,35 @@
    }
 }
 
-.green {
+.green,
+.red {
+   display: flex;
+   align-items: center;
    font-size: 1.2em;
-   color: #26AB5F;
+
+   p {
+      margin-right: 5px;
+      color: inherit;
+
+      &:last-child {
+         margin-right: 0;
+      }
+   }
 
    span {
+      color: inherit;
       font-size: .8em;
-      color: #26AB5F;
+
    }
 }
 
+.green {
+   color: #26AB5F;
+
+}
+
 .red {
-   font-size: 1.2em;
    color: $red;
-
-   span {
-      font-size: .8em;
-
-      color: $red;
-   }
 }
 
 .percent {
@@ -84,6 +94,7 @@
 .total {
    display: flex;
    font-size: inherit;
+   align-items: center;
 
    &__item {
       font-size: inherit;

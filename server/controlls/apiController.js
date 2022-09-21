@@ -80,6 +80,17 @@ class apiController {
          res.status(400).json({ message: 'при вычислении произошла цены ошибка' })
       }
    }
+   async GetCoinList(req, res) {
+      try {
+         console.log('true');
+         const resp = await gotingServer.getCoinsList()
+         res.json(resp)
+         console.log('true_end');
+      }
+      catch (e) {
+         res.status(404).json({ message: 'произошла ошибка при запросе на монету' })
+      }
+   }
 }
 
 module.exports = new apiController()

@@ -1,31 +1,54 @@
 import MainLayout from "../../components/MainLayuot"
 import styles from './index.module.scss'
-import Wallet from '../../components/wallet/Wallet'
 import CoinWallet from "../../components/wallet/CointWallet"
-import { ItemMarkets as Item } from '../../components/UI/BlockList/Items'
 import CurrentWallet from "./CurrentWallet"
 import AddWallet from "../../components/wallet/AddWallet"
-import { Percent } from "../../components/UI/BlockList/UI"
+import { Percent, Profit } from "../../components/UI/BlockList/UI"
 import AuthContainer from '../../hoc/AuthHoc'
 import { observer } from "mobx-react-lite"
 import { useContext } from "react"
-import { StoreContext } from "../_app"
+import { SocketContext, StoreContext } from "../_app"
+import { fixedCoinNum, fixedNum, floor } from "../../utils.js/num"
+import { useState } from "react"
+import cookie from 'js-cookie'
+import { useEffect } from "react"
+import Spinner from "../../components/UI/loaders/Spinner"
+import Assets from "./Assets"
 function Profile() {
-   const { wallet } = useContext(StoreContext)
-   const item = {
-      id: '34563464uhjgfbds45ye',
-      coin: {
-         symbol: 'BTC',
-         label: 'Bitcoin',
-         coinId: ''
-      },
-      price: {
-         amount: 55.153,
-         currency: 'usd'
-      },
-      percent: -26.8
-   }
-   console.log(wallet.list);
+   const { wallet, user } = useContext(StoreContext)
+   const [balance, setBalance] = useState({
+      total: floor(wallet.totalWallet.total),
+      percentage: fixedNum(wallet.totalWallet.percentage),
+      profit: fixedNum(wallet.totalWallet.profit)
+   })
+   useEffect(() => {
+      setBalance({
+         total: floor(wallet.totalWallet.total),
+         percentage: fixedNum(wallet.totalWallet.percentage),
+         profit: fixedNum(wallet.totalWallet.profit)
+      })
+   }, [wallet.totalWallet])
+
+   const { socket, socketConnected } = useContext(SocketContext)
+
+   useEffect(() => {
+      if (!socket || !socketConnected) return
+
+      if (!wallet.list.length) {
+         socket.emit('wallet')
+
+         console.log('gets');
+      }
+
+   }, [socketConnected]);
+
+   const [current_wallet, setCurrent_wallet] = useState()
+   useEffect(() => {
+      if (wallet.list) {
+         setCurrent_wallet(wallet.list[0])
+         console.log('currWall', wallet.list[0]);
+      }
+   }, [wallet.list])
 
 
    return (
@@ -38,125 +61,39 @@ function Profile() {
                      <AddWallet />
                   </li>
                   {
-                     wallet.isloading ? <div>Loading...</div> :
-                        wallet.list.length ?
-                           wallet.list.map((wallet) => {
-                              console.log('bilo');
-                              return (
-                                 <li className={styles.wallets__item}>
-                                    <CoinWallet
-                                       amount={wallet.amount}
-                                       analytics={wallet.analytics}
-                                       coin={wallet.coin}
-                                       currancy={wallet.currancy}
-                                    />
-                                 </li>
-                              )
-                           })
-                           : <div>У вас нет кошельков</div>}
+                     wallet.list.length ?
+                        wallet.list.map((item) => {
+                           return (
+                              <li className={styles.wallets__item}>
+                                 <CoinWallet
+                                    isloading={wallet.isloading}
+                                    amount={item.amount}
+                                    analytics={item.analytics}
+                                    coin={item.coin}
+                                    currancy={user.currency.label}
+                                 />
+                              </li>
+                           )
+                        })
+                        : <div>Loading</div>}
                </ul>
             </div>
             <div className={styles.wallet}>
-               <CurrentWallet />
+               {
+                  current_wallet ?
+                     <CurrentWallet isLoading={wallet.isloading} wallet={current_wallet} />
+                     :
+                     <div className="spinner_center__display">
+                        <Spinner />
+                     </div>
+               }
             </div>
-            <div className={styles.assets}>
-               <div className={styles.assets__header}>
-                  <p>Assets</p>
-                  <Item key={item.id}>
-                     <p className={styles.Upper}>{item.coin.symbol}</p>
-                     <p className={styles.coin}>{item.coin.label}</p>
-                     <p className={styles.price}>
-                        {item.price.amount}
-                        <span>{item.price.currency}</span>
-                     </p>
-                     <Percent>
-                        {item.percent}
-                     </Percent>
-                  </Item>
-               </div>
-               {/* это то же самое что и markets + transactions */}
-               <div className={styles.assets__main}>
-                  <ul className={styles.assets__list}>
-                     <Item>
-                        ghbdt
-                     </Item>
-                     <Item>
-                        ghbdt
-                     </Item>
-                     <Item>
-                        ghbdt
-                     </Item>
-                     <Item>
-                        ghbdt
-                     </Item>
-                     <Item>
-                        ghbdt
-                     </Item>
-                     <Item>
-                        ghbdt
-                     </Item>
-                     <Item>
-                        ghbdt
-                     </Item>
-                     <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item>
-                     <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item>
-                     <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item> <Item>
-                        ghbdt
-                     </Item>
-                  </ul>
-               </div>
-
-            </div>
+            <Assets
+               balance={balance}
+               list={wallet.list}
+               userCurrency={user.currency.label}
+               isLoading={wallet.isloading}
+            />
          </main>
       </MainLayout>
 

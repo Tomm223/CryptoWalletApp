@@ -63,5 +63,3 @@ class historyService {
 }
 
 module.exports = new historyService()
-
-

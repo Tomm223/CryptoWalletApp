@@ -10,9 +10,19 @@
    border: 0;
 }
 
+.chart {
+
+
+   img {
+      width: 100%;
+      height: 100%;
+   }
+}
+
 .head {
    width: 100%;
    height: auto;
+   margin-bottom: 2em;
 
    &__selects {
       display: grid;

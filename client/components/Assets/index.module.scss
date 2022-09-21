@@ -19,3 +19,41 @@
       font-weight: 600;
    }
 }
+
+.chart {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 10px;
+}
+
+.chart_info {
+   overflow-y: auto;
+   height: 70px;
+
+   &__list {
+      display: flex;
+      flex-wrap: wrap;
+   }
+
+   &__item {
+      background-color: rgba($color: #1A71FF, $alpha: .1);
+      padding: 5px 10px;
+      margin-bottom: 2px;
+      margin-right: 2px;
+      border-radius: 5px;
+      display: flex;
+   }
+
+   &__name {
+      color: #4690EF;
+      font-size: 12px;
+   }
+
+   &__color {
+      margin-right: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+   }
+}

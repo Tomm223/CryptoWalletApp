@@ -11,6 +11,7 @@ import { StoreContext } from '../_app'
 import { FetchWallet } from '../../http/fetch'
 import { contructionOptionCurrency } from '../../utils.js/select'
 import { unixToMyDateObj } from '../../utils.js/date'
+import Spinner from '../../components/UI/loaders/Spinner'
 
 
 function Transactions() {
@@ -74,24 +75,30 @@ function Transactions() {
 
             <div className={styles.block}>
                {<ul className={styles.list}>
-                  {history.sort.map((item, i) => {
+                  {history.sort.length ?
+                     history.sort.map((item, i) => {
 
-                     const { time, date } = unixToMyDateObj(item.date || 1662114020299)
-                     return (
-                        <Item key={item._id}>
-                           <DownUp status={item?.status} />
-                           <p className={styles.p}>{item.type}</p>
-                           <div className={styles.p}>
-                              <CountCoin currancy={item?.coin?.symbol}>{item?.amount}</CountCoin>
-                           </div>
-                           <div className={styles.p}>
-                              <p className={styles.time}>{time}</p>
-                              <p>{date}</p>
-                           </div>
-                           <Status status={item.statusWord} />
-                        </Item>
-                     )
-                  })}
+                        const { time, date } = unixToMyDateObj(item.date || 1662114020299)
+                        return (
+                           <Item key={item._id}>
+                              <DownUp status={item?.status} />
+                              <p className={styles.p}>{item.type}</p>
+                              <div className={styles.p}>
+                                 <CountCoin currancy={item?.coin?.symbol}>{item?.amount}</CountCoin>
+                              </div>
+                              <div className={styles.p}>
+                                 <p className={styles.time}>{time}</p>
+                                 <p>{date}</p>
+                              </div>
+                              <Status status={item.statusWord} />
+                           </Item>
+                        )
+                     })
+                     :
+                     <div className={'spinner_center'}>
+                        <Spinner />
+                     </div>
+                  }
                </ul>}
             </div>
 
