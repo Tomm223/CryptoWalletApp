@@ -10,6 +10,7 @@ import { WalletContext } from "@/context/WalletProvider"
 import WalletModal from "@/components/shared/modals/wallet"
 import { set } from "mobx"
 import { fixedCoinNum } from "@/utils/num"
+
 const Mobile = ({ userCurr: { curr_label, curr_value }, wallets, total, isLoading, loader }) => {
 
    const { main } = useContext(StoreContext)

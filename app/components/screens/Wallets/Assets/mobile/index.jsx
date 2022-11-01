@@ -10,7 +10,7 @@ import { observer } from 'mobx-react-lite'
 import { StoreContext } from '@/pages/_app'
 import WalletModal from '@/components/shared/modals/wallet'
 
-export default memo(({ openModal, list, isLoading, userCurrency: { curr_label, curr_value } }) => {
+const Mobile = memo(({ openModal, list, isLoading, userCurrency: { curr_label, curr_value } }) => {
 
 
 
@@ -53,3 +53,5 @@ export default memo(({ openModal, list, isLoading, userCurrency: { curr_label, c
 
    )
 })
+
+export default Mobile

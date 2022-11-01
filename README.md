@@ -1,5 +1,6 @@
 
 ERROR:
+1) я изменил readme в github будет небольшая ошибка при исправлении
 1) Timeout на запрос wallet+history socket "authtorization_true"
 2) /вроде нет ошибки/ No Stylesheets In Head Component google fonts in next.js
 3) когда буду делать на деплой или уже будет может возникнуть ошибка тк сервер принимает только Clietn от localhost:3000

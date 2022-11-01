@@ -4,7 +4,8 @@ import { memo } from 'react'
 import styles from '../index.module.scss'
 import Image from 'next/image'
 import logo from '@/assets/images/wallet-logo.png'
-export default memo(({ totalWallet, isLoading, userCurrency }) => {
+
+const Total = memo(({ totalWallet, isLoading, userCurrency }) => {
    const $total = floor(totalWallet.total)
    const $percentage = fixedNum(totalWallet.percentage)
    const $profit = fixedNum(totalWallet.profit)
@@ -29,3 +30,5 @@ export default memo(({ totalWallet, isLoading, userCurrency }) => {
       </div>
    )
 })
+
+export default Total

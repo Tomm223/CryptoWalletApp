@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 
-export default ({ state: { isActive, setActive }, children }) => {
+const Checkbox = ({ state: { isActive, setActive }, children }) => {
 
    return (
       <button
@@ -11,3 +11,5 @@ export default ({ state: { isActive, setActive }, children }) => {
       </button>
    )
 }
+
+export default Checkbox

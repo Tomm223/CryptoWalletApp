@@ -3,7 +3,7 @@ import styles from './index.module.scss'
 import { ReactSelectNoSSR } from '@/components/UI/form/Select'
 import Tabs from '@/components/shared/Tabs'
 
-export default memo(({
+const Sort = memo(({
    isMobile,
    typeState: { type, setType },
    selectState: { options, currency, setCurrency },
@@ -35,3 +35,6 @@ export default memo(({
    )
 })
 
+
+
+export default Sort

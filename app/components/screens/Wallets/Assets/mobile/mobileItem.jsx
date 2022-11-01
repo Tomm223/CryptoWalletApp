@@ -2,7 +2,7 @@ import { ItemAssetsMobile as Item } from '@/assets/styledComponents/Items'
 import { Percent, Profit, Total } from '@/components/UI/BlockList/UI'
 import { Button_Green } from '@/components/UI/form/buttons'
 
-export default () => {
+const ItemMobile = () => {
    return (
       <>
 
@@ -29,3 +29,5 @@ export default () => {
 
    )
 }
+
+export default ItemMobile

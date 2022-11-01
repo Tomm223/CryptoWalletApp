@@ -1,7 +1,7 @@
 import InputForm from "@/components/UI/form/inputs/InputForm"
 import styles from '../index.module.scss'
 
-export default ({ value, state }) => {
+const Input = ({ value, state }) => {
    const { type, keyFormik, placeHolder } = value
    const { values, handleBlur, handleChange, touched, errors } = state
 
@@ -16,3 +16,5 @@ export default ({ value, state }) => {
       </>
    )
 }
+
+export default Input

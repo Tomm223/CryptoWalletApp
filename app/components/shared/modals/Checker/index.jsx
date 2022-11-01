@@ -1,7 +1,8 @@
 import { Button_Blue, Button_Green } from "../../../UI/form/buttons"
 import Modal from "../../../UI/Modal"
 import styles from './index.module.scss'
-export default ({ str, toContinue, toClose }) => {
+
+const Checker = ({ str, toContinue, toClose }) => {
    async function hundle(contin) {
       toClose()
       if (contin) {
@@ -26,3 +27,5 @@ export default ({ str, toContinue, toClose }) => {
       </Modal>
    )
 }
+
+export default Checker

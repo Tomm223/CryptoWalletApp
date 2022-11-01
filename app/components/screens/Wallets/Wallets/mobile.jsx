@@ -4,7 +4,7 @@ import styles from './index.module.scss'
 import stylesMain from '../index.module.scss'
 import { memo } from 'react'
 
-export default memo(({ openModal, list, isloading, loader, userCurrency }) => {
+const Mobile = memo(({ openModal, list, isloading, loader, userCurrency }) => {
 
    return (
       <ul className={stylesMain.wallets__list}>
@@ -39,3 +39,4 @@ export default memo(({ openModal, list, isloading, loader, userCurrency }) => {
    )
 })
 
+export default Mobile
