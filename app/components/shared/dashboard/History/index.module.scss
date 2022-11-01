@@ -1,0 +1,17 @@
+.container {
+   max-width: 780px;
+   height: 100%;
+}
+
+.p {
+   display: flex;
+   align-items: center;
+}
+
+.unList {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 13px;
+}

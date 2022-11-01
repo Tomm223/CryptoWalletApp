@@ -1,0 +1,37 @@
+@import '../../../../assets/styles/globals.scss';
+
+.main {
+   width: auto;
+   max-width: 600px;
+   font-size: 18px;
+   margin-bottom: 2em;
+
+   &__string {}
+}
+
+.footer {
+   display: grid;
+   grid-template-columns: 4fr 1fr 2fr;
+   grid-template-rows: 1fr;
+   gap: 10px
+}
+
+.btn,
+.btn_red {
+   font-size: 16px;
+   padding: 10px 20px;
+}
+
+.btn_red {
+   background-color: #EB4F44;
+
+   &:hover {
+      background-color: #C8443A;
+   }
+}
+
+@media screen and (max-width:1048px) {
+   .main {
+      width: 86vw;
+   }
+}

@@ -1,0 +1,31 @@
+@import '../../../assets/styles/globals.scss';
+
+.checkbox,
+.checkbox_active {
+   font-size: inherit;
+   cursor: pointer;
+   padding: .5em 1em;
+   border: 0;
+   border-radius: .5em;
+
+   transition: all 0.2s ease-in;
+   background-color: rgba($color: #262C30, $alpha: .2);
+   color: #fff;
+   -webkit-box-shadow: 0px 0px .3em 0px rgba(0, 0, 0, 0.75);
+   -moz-box-shadow: 0px 0px .3em 0px rgba(0, 0, 0, 0.75);
+   box-shadow: 0px 0px .3em 0px rgba(0, 0, 0, 0.75);
+
+   &:hover {
+      -webkit-box-shadow: 0px 0px .1em 0px rgba(0, 0, 0, 0.55);
+      -moz-box-shadow: 0px 0px .1em 0px rgba(0, 0, 0, 0.55);
+      box-shadow: 0px 0px .1em 0px rgba(0, 0, 0, 0.55);
+   }
+}
+
+.checkbox_active {
+   background-color: $black_black; //#131313
+   color: $btn_active;
+   -webkit-box-shadow: inset 0px 0px 4px 2px #0D0D0D; //rgba(0, 0, 0, 0.75);
+   -moz-box-shadow: inset 0px 0px 4px 2px #0D0D0D; //rgba(0, 0, 0, 0.75);
+   box-shadow: inset 0px 0px 4px 2px #0D0D0D; //rgba(0, 0, 0, 0.75);
+}

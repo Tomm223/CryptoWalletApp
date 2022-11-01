@@ -1,0 +1,152 @@
+@import '../../../assets/styles/globals.scss';
+
+
+.main {
+   width: 100%;
+   display: grid;
+   grid-template-rows: 12em 1fr;
+}
+
+
+.block {
+   display: flex;
+   position: relative;
+   width: 100%;
+   height: 100%;
+   margin: 0 auto;
+   font-size: inherit;
+   overflow-y: scroll;
+   padding: 0 2em;
+   padding-bottom: 1em;
+
+   &::-webkit-scrollbar {
+      width: 5px;
+      height: 0;
+   }
+}
+
+.header {
+   padding: 1em 1em;
+   width: 100%;
+   height: 100%;
+   font-size: inherit;
+   display: flex;
+   justify-content: space-between;
+   flex-direction: column;
+   background-color: $backgroundDark;
+   z-index: 2;
+
+
+   &__head {
+      padding: 1em 0;
+      padding-top: 1em;
+      padding-bottom: 0;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+   }
+
+   &__article {
+      font-size: 2.5em;
+   }
+
+   &__checkbox {
+      font-size: 2em;
+   }
+
+   &__sort {}
+}
+
+.sort {
+   display: grid;
+   grid-template-columns: 1fr 1.5fr 1fr;
+
+   &__item {
+      width: 80%;
+      display: flex;
+      align-items: center;
+
+      &_label {
+         font-size: 16px;
+         margin-right: .5em;
+      }
+   }
+
+}
+
+.list {
+   font-size: inherit;
+   width: 100%;
+}
+
+.p {
+   display: flex;
+   align-items: center;
+}
+
+.time {
+   margin: .4em;
+}
+
+.unList {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 13px;
+}
+
+@media screen and (max-width:1048px) {
+   .main {
+      grid-template-rows: 5em 1fr;
+   }
+
+   .block {
+      padding: 0 0px;
+
+      &::-webkit-scrollbar {
+         width: 0;
+         height: 0;
+      }
+   }
+
+   .header {
+      padding: 0;
+      padding-top: 1em;
+
+      &__head {
+         display: flex;
+         justify-content: space-between;
+      }
+
+      &__article {
+         margin-bottom: 10px;
+         display: flex;
+      }
+   }
+
+   .sort {
+      display: grid;
+      grid-template-columns: minmax(33vw, 340px);
+      grid-template-rows: 1fr 1fr 1fr;
+      gap: 3em;
+
+      &__item {
+         width: 100%;
+      }
+   }
+
+}
+
+
+@media screen and (max-width:768px) {
+   .main {
+      grid-template-rows: 9em 1fr;
+   }
+
+   .header {
+      &__head {
+         padding: 0;
+      }
+   }
+}

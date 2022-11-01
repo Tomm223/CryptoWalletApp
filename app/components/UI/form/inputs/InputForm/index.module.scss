@@ -1,0 +1,25 @@
+@import '../../../../../assets/styles/globals.scss';
+
+
+.input {
+   width: 100%;
+   border-radius: .4em;
+   padding: .7em .7em;
+   background-color: $black;
+   color: $supText;
+   font-weight: 500;
+   font-size: 18px;
+   border: none;
+
+   -webkit-box-shadow: inset 0px 0px 4px 2px #0D0D0D; //rgba(0, 0, 0, 0.75);
+   -moz-box-shadow: inset 0px 0px 4px 2px #0D0D0D; //rgba(0, 0, 0, 0.75);
+   box-shadow: inset 0px 0px 4px 2px #0D0D0D; //rgba(0, 0, 0, 0.75);
+
+   &::placeholder {
+      color: $btn_gray;
+   }
+
+   &:focus {
+      outline: none;
+   }
+}

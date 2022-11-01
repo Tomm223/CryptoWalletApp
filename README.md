@@ -1,24 +1,16 @@
 
-TASKS:
-
-CONVERT ДОЛЖЕН ОСНОВЫВАТСЯ НА STATEMESSAGEMENTS ИЛИ МОЖНО НЕТ? не нужен тк в любом случае при запуске будут дефолтные 
-1) loading dashboard markets history loader not center ПОПРОБУЙ НЕ ЗАПУСКАТЬ СЕРВЕР И ВКЛЮЧИТЬ КЛИЕНТ
-1) react memo !!!
-1) assets chart тоже сделать через store
-1) при полонении инфой о юзере нужно переподключаьься к сокету!!
-1) profile обработать loading+ currWallet chartLoader + assets сделать как dashboard_market
-1) ОКНО КАК ALERT С ВОПРОСОМ НАПРИМЕР: ВЫ ДЕЙСТВИТЕЛЬНО ХОТИТЕ ВЫЙТИ ИЗ АКК ?
-2) Setting Page описан в блокноте
-2) profit: отверстать и сделать нормальным
-3) доделать chartBig так около useEffect внизу написан начальный план 
-
-ОПТИМИЗАЦИЯ:
-1) делить большие компоненты на поменьше типо есть transactionPage => разделим на сортировачный компонент и компонент выводяший список
-
 ERROR:
-1) No Stylesheets In Head Component google fonts in next.js
-2) localStore почему токены там сохраняются ?
+1) Timeout на запрос wallet+history socket "authtorization_true"
+2) /вроде нет ошибки/ No Stylesheets In Head Component google fonts in next.js
+3) когда буду делать на деплой или уже будет может возникнуть ошибка тк сервер принимает только Clietn от localhost:3000
+так ли это?
 
+ДОП:
+12) аватарка
+1) page_help = documention
+2) виртуальный счет ! (источник заметки!)
+3)снять\внести функция из currWallet: отдавать число приведенное до 5и после запятой => после фиксы сверху убрать все коинфиксы функции
+4) можно отсылать пароль на клиент а не просто изменять его, только как обойти хэширование пароля?
 # Crypto Wallet App (нет аналогов)
 
 находится в разработке

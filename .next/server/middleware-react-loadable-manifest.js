@@ -1,0 +1,1 @@
+self.__REACT_LOADABLE_MANIFEST={"..\\app\\components\\UI\\form\\Select\\index.jsx -> ./select":{"id":"..\\app\\components\\UI\\form\\Select\\index.jsx -> ./select","files":["static/chunks/app_components_UI_form_Select_select_jsx.js"]}}

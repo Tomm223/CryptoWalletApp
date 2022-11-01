@@ -1,0 +1,108 @@
+@import '../../../../assets/styles/globals.scss';
+
+.downup {
+   width: 25px;
+   height: 25px;
+}
+
+.status,
+.percent {
+   font-size: 1em;
+   border-radius: .6em;
+   padding: .4em .8em;
+
+   &_green {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1em;
+      border-radius: .6em;
+      padding: .4em .8em;
+      background-color: rgba($color: $green, $alpha: 0.2);
+      color: $green;
+   }
+
+   &_orange {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1em;
+      border-radius: .6em;
+      padding: .4em .8em;
+      background-color: rgba($color: $orange, $alpha: .2);
+      color: $orange ;
+   }
+
+   &_red {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1em;
+      border-radius: .6em;
+      padding: .4em .8em;
+      background-color: rgba($color: $red, $alpha: .2);
+      color: $red;
+   }
+
+   &__item {
+      font-size: inherit;
+      line-height: 1em;
+      color: inherit;
+   }
+}
+
+.green,
+.red {
+   display: flex;
+   align-items: center;
+   font-size: 1.2em;
+
+   p {
+      margin-right: 5px;
+      color: inherit;
+
+      &:last-child {
+         margin-right: 0;
+      }
+   }
+
+   span {
+      color: inherit;
+      // font-size: .8em;
+
+   }
+}
+
+.green {
+   color: #26AB5F;
+
+}
+
+.red {
+   color: $red;
+}
+
+.percent {
+
+   &_green,
+   &_red,
+   &_orange {
+      border-radius: 2em;
+   }
+}
+
+.total {
+   display: flex;
+   font-size: inherit;
+   align-items: center;
+
+   &__item {
+      font-size: inherit;
+      margin-right: 5px;
+
+      &:last-child {
+         margin-right: 0;
+      }
+   }
+
+}

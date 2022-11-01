@@ -1,0 +1,147 @@
+@import '../../../../assets/styles/globals.scss';
+
+.item {
+   margin-bottom: 10px;
+}
+
+.btn {
+   margin-top: 20px;
+   grid-row: 2/3;
+   grid-column: 1/2;
+}
+
+.error {
+   color: red;
+   text-align: center;
+   font-size: 1.2em;
+}
+
+
+.block {
+   width: 350px;
+
+   &__aside {
+      position: relative;
+      width: 100%;
+      height: auto;
+      margin-bottom: 1em;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 500;
+
+      &__close {
+         width: 30px;
+         height: 30px;
+         position: absolute;
+         top: 50%;
+         left: 100%;
+         transform: translate(-100%, -50%);
+         cursor: pointer;
+
+         img {
+            width: 100%;
+            height: 100%;
+         }
+      }
+
+      &_blue {
+
+         color: #2B6DC7;
+      }
+   }
+}
+
+.form {
+
+   &__form {}
+
+   &__arrow {
+      display: grid;
+      grid-template-rows: 1fr;
+      grid-template-columns: 1fr 20px;
+   }
+}
+
+.arrow {
+   width: 100%;
+   height: 70%;
+   margin: auto 0;
+   display: grid;
+   grid-template-columns: 50% 50% 2px;
+   grid-template-rows: 2px 1fr 2px;
+
+   &__arrow_start {
+      grid-column: 1/4;
+      grid-row: 1/2;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+   }
+
+   &__main {
+      grid-row: 1/4;
+      grid-column: 3/4;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      margin: 0;
+      padding: 0;
+   }
+
+   &__arrow {
+      grid-row: 3/4;
+      grid-column: 2/3;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+
+   }
+
+   &__arrow_end {
+      grid-row: 3/4;
+      grid-column: 1/2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      transform: rotate(180deg);
+
+      img {
+         width: 150%;
+         height: auto;
+      }
+   }
+}
+
+.change {
+   margin: 0 auto;
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   padding: 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: rgba($color: #14141B, $alpha: .3);
+   cursor: pointer;
+
+   &:hover {
+      background-color: rgba($color: #14141B, $alpha: .7);
+   }
+
+   img {
+      width: 100%;
+      height: 100%;
+   }
+}
+
+@media screen and (max-width:420px) {
+   .block {
+      width: 270px;
+   }
+}
