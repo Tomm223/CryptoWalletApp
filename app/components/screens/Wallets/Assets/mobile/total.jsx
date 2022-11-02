@@ -5,7 +5,7 @@ import styles from '../index.module.scss'
 import Image from 'next/image'
 import logo from '@/assets/images/wallet-logo.png'
 
-const Total = memo(({ totalWallet, isLoading, userCurrency }) => {
+const TotalComponent = memo(({ totalWallet, isLoading, userCurrency }) => {
    const $total = floor(totalWallet.total)
    const $percentage = fixedNum(totalWallet.percentage)
    const $profit = fixedNum(totalWallet.profit)
@@ -31,4 +31,4 @@ const Total = memo(({ totalWallet, isLoading, userCurrency }) => {
    )
 })
 
-export default Total
+export default TotalComponent

@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import stylesPage from '../index.module.scss'
-import stylesMarket from '../../markets/index.module.scss'
+import stylesMarket from '../../Markets/index.module.scss'
 import { ItemProfile as Item, ItemBalanceProfile as ItemBalance } from 'app/assets/styledComponents/Items'
 import { Percent, Profit, Total } from '@/components/UI/BlockList/UI'
 import { fixedCoinNum, fixedNum, floor } from '@/utils/num'
