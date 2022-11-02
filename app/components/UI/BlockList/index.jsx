@@ -5,7 +5,7 @@ export default function BlockList({ label, link, children }) {
    const router = useRouter()
    const toPage = (e) => {
       e.preventDefault()
-      if (link.lenght) {
+      if (link.length) {
          router.push(link)
       }
    }
