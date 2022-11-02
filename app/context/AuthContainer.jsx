@@ -49,7 +49,7 @@ function AuthContainer({ children }) {
             }
             else {
                user.isAnonim()
-               main.pushErrors(`Некоторые функции приложения могут не работать, войдите в аккаунт`)
+               main.pushAlert(`Некоторые функции приложения могут не работать, войдите в аккаунт`)
             }
          }
          catch (e) {
