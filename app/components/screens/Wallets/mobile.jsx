@@ -68,13 +68,18 @@ const Mobile = ({ userCurr: { curr_label, curr_value }, wallets, total, isLoadin
                totalWallet={total} isLoading={isLoading} userCurrency={curr_label}
             />
             <div className={styles.wallets}>
-               <Wallets_mobile
-                  list={wallets}
-                  isloading={isLoading}
-                  loader={loader}
-                  userCurrency={curr_label}
-                  openModal={openModal}
-               />
+               <div className={styles.wallets__overflow}>
+                  <Wallets_mobile
+                     list={wallets}
+                     isloading={isLoading}
+                     loader={loader}
+                     userCurrency={curr_label}
+                     openModal={openModal}
+                  />
+               </div>
+               <div className={styles.wallets__gradient}>
+
+               </div>
             </div>
             <div className={styles.assets}>
                <Assets_mobile

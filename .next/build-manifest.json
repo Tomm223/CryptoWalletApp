@@ -30,15 +30,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/markets": [
+    "/wallets": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/markets.js"
-    ],
-    "/transactions": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/transactions.js"
+      "static/chunks/pages/wallets.js"
     ]
   },
   "ampFirstPages": []

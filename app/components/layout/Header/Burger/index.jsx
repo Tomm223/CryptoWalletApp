@@ -31,9 +31,6 @@ export default function Burger({ isOpen, setIsOpen }) {
                </div>
             </div>
          </div>
-         :
-         <></>
-
       </>
    )
 }

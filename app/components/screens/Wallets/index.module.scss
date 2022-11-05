@@ -38,10 +38,25 @@
    overflow-y: auto;
    grid-row: 3/6;
    grid-column: 1/2;
+   position: relative;
+   padding: 0;
 
-   &::-webkit-scrollbar {
-      width: 0;
-      height: 0;
+   &__gradient {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 20px;
+      background: linear-gradient(90deg, rgba(#12131A, 0) 0%, rgba(#12131A, .7) 90%);
+   }
+
+   &__overflow {
+      overflow-x: auto;
+
+      &::-webkit-scrollbar {
+         width: 0;
+         height: 0;
+      }
    }
 
    &__list {
@@ -239,7 +254,7 @@
    }
 
    .wallets {
-      padding-right: 10px;
+      //padding-right: 10px;
       display: flex;
       width: 100%;
       min-height: 172px;

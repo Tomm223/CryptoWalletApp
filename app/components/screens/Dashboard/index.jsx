@@ -47,14 +47,17 @@ function Dashboard() {
          <main className={`${styles.main} main`}>
             <div className={styles.block}>
                <div className={styles.wallet}>
-                  <Wallet
-                     isloading={wallet.isloading}
-                     list={wallet.list}
-                     loader={wallet.loader}
-                     totalWallet={wallet.totalWallet}
-                     userCurrency={user.currency.label}
-                     isAuth={user.isAuth}
-                  />
+                  <div className={styles.wallet__list}>
+                     <Wallet
+                        isloading={wallet.isloading}
+                        list={wallet.list}
+                        loader={wallet.loader}
+                        totalWallet={wallet.totalWallet}
+                        userCurrency={user.currency.label}
+                        isAuth={user.isAuth}
+                     />
+                  </div>
+                  <div className={styles.wallet__gradient}></div>
                </div>
                <div className={styles.chart}>
                   <DashboardChart />
