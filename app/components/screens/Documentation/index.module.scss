@@ -33,6 +33,12 @@
       display: grid;
       grid-template-columns: 25px 1fr;
       margin-bottom: 10px;
+
+      &_text {}
+
+      &_span {
+         margin-bottom: 10px;
+      }
    }
 
    &__list {
