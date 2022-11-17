@@ -13,7 +13,6 @@ import Head from 'next/head'
 
 
 function MainLayout({ children }) {
-
    const { main } = useContext(StoreContext)
    const { toUnAuth, login, registration } = useContext(AuthContext)
 

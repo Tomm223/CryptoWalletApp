@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST={"..\\app\\components\\UI\\form\\Select\\index.jsx -> ./select":{"id":"..\\app\\components\\UI\\form\\Select\\index.jsx -> ./select","files":["static/chunks/app_components_UI_form_Select_select_jsx.js"]},"..\\app\\components\\shared\\charts\\index.jsx -> ./bigchart":{"id":"..\\app\\components\\shared\\charts\\index.jsx -> ./bigchart","files":["static/chunks/app_components_shared_charts_bigchart_jsx.js"]}}
+self.__REACT_LOADABLE_MANIFEST={}
