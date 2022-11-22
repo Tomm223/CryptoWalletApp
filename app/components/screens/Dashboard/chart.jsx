@@ -54,7 +54,6 @@ function DashboardChart() {
       dashboard.setChartCoiId('bitcoin')
    }, [])
 
-
    return (
 
       <ChartBig
