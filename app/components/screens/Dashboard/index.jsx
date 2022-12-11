@@ -10,10 +10,8 @@ import { SocketContext, StoreContext } from '@/pages/_app'
 import DashboardChart from './chart'
 import DashboardConvert from './convert';
 
-// убираем по одному компоненту и поймем где
-
-
 function Dashboard() {
+
    const { history, user, dashboard, wallet } = useContext(StoreContext)
    const { socket, socketConnected } = useContext(SocketContext)
    // wallet history market

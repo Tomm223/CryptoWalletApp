@@ -3,8 +3,13 @@ import screen from '@/assets/images/screen_help.png'
 import screen2 from '@/assets/images/screen_help2.png'
 import styles from './index.module.scss'
 import Image from "next/image";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useCallback } from "react";
 
 export default function Documentation() {
+
+
    return (
       <MainLayout>
          <div className={styles.main}>

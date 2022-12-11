@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { StoreContext } from '@/pages/_app';
 
-export const API_URL = `https://crypto-wallet-server-one.herokuapp.com`
+export const API_URL = 'https://crypto-wallet-server.vercel.app' //`https://crypto-wallet-server-one.herokuapp.com`
 
 
 

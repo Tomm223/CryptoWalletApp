@@ -5,7 +5,9 @@ import more from '@/assets/images/person-more.png'
 export default function ButtonMore({ onClick }) {
    function hundle(e) {
       e.preventDefault()
-      onClick()
+      if (onClick) {
+         onClick()
+      }
    }
    return (
       <button onClick={hundle} className={styles.more}>
