@@ -5,9 +5,9 @@
 ### Deploy: https://crypto-wallet-app.vercel.app/
 
 ### Технологии в данном проекте:
-Front: Next.js, Mobx, SCSS
-Transfer: Socket.io
-Back: Express.js
+##### Front: Next.js, Mobx, SCSS
+##### Transfer: Socket.io
+##### Back: Express.js
 
 
 
